@@ -8,6 +8,7 @@ const meta = {
   tags: ["ai-generated"],
   args: {
     value: 40,
+    "aria-label": "Upload progress",
   },
 } satisfies Meta<typeof Progress>
 

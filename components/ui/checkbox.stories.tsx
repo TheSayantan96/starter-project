@@ -7,6 +7,9 @@ import { Label } from "./label"
 const meta = {
   component: Checkbox,
   tags: ["ai-generated"],
+  args: {
+    "aria-label": "Accept terms and conditions",
+  },
 } satisfies Meta<typeof Checkbox>
 
 export default meta

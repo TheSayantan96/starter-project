@@ -6,6 +6,9 @@ import { Switch } from "./switch"
 const meta = {
   component: Switch,
   tags: ["ai-generated"],
+  args: {
+    "aria-label": "Airplane mode",
+  },
 } satisfies Meta<typeof Switch>
 
 export default meta

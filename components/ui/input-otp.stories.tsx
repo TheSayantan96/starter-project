@@ -19,7 +19,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
-    <InputOTP maxLength={6}>
+    <InputOTP maxLength={6} aria-label="One-time password">
       <InputOTPGroup>
         <InputOTPSlot index={0} />
         <InputOTPSlot index={1} />
@@ -39,7 +39,7 @@ export const Default: Story = {
 
 export const WithSeparator: Story = {
   render: () => (
-    <InputOTP maxLength={6}>
+    <InputOTP maxLength={6} aria-label="One-time password">
       <InputOTPGroup>
         <InputOTPSlot index={0} />
         <InputOTPSlot index={1} />
@@ -57,7 +57,7 @@ export const WithSeparator: Story = {
 
 export const Disabled: Story = {
   render: () => (
-    <InputOTP maxLength={4} disabled>
+    <InputOTP maxLength={4} disabled aria-label="One-time password">
       <InputOTPGroup>
         <InputOTPSlot index={0} />
         <InputOTPSlot index={1} />

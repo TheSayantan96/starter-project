@@ -10,6 +10,9 @@ import {
 const meta = {
   component: NativeSelect,
   tags: ["ai-generated"],
+  args: {
+    "aria-label": "Fruit",
+  },
 } satisfies Meta<typeof NativeSelect>
 
 export default meta

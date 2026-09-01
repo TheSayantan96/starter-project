@@ -25,13 +25,13 @@ export const Default: Story = {
 export const IconOnly: Story = {
   render: () => (
     <ButtonGroup>
-      <Button variant="outline" size="icon">
+      <Button variant="outline" size="icon" aria-label="Bold">
         <BoldIcon />
       </Button>
-      <Button variant="outline" size="icon">
+      <Button variant="outline" size="icon" aria-label="Italic">
         <ItalicIcon />
       </Button>
-      <Button variant="outline" size="icon">
+      <Button variant="outline" size="icon" aria-label="Underline">
         <UnderlineIcon />
       </Button>
     </ButtonGroup>

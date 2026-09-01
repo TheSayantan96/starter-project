@@ -42,23 +42,31 @@ export const Horizontal: Story = {
 
 export const Vertical: Story = {
   render: (args) => (
-    <ResizablePanelGroup
-      {...args}
-      orientation="vertical"
-      className="h-64 max-w-md rounded-lg border"
-    >
-      <ResizablePanel defaultSize={25}>
-        <div className="flex h-full items-center justify-center p-6">
-          <span className="font-semibold">Header</span>
-        </div>
-      </ResizablePanel>
-      <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={75}>
-        <div className="flex h-full items-center justify-center p-6">
-          <span className="font-semibold">Content</span>
-        </div>
-      </ResizablePanel>
-    </ResizablePanelGroup>
+    // react-resizable-panels' Group always renders with an inline
+    // `height: 100%`, which only resolves against a definite-height
+    // ancestor — row-oriented groups get away without one because the
+    // browser falls back to content-based auto-sizing, but a column
+    // (vertical) group's percentage-based panel heights need a real
+    // height further up the tree to resolve against.
+    <div className="h-80 max-w-md">
+      <ResizablePanelGroup
+        {...args}
+        orientation="vertical"
+        className="rounded-lg border"
+      >
+        <ResizablePanel defaultSize={25}>
+          <div className="flex h-full items-center justify-center p-6">
+            <span className="font-semibold">Header</span>
+          </div>
+        </ResizablePanel>
+        <ResizableHandle withHandle />
+        <ResizablePanel defaultSize={75}>
+          <div className="flex h-full items-center justify-center p-6">
+            <span className="font-semibold">Content</span>
+          </div>
+        </ResizablePanel>
+      </ResizablePanelGroup>
+    </div>
   ),
 }
 
