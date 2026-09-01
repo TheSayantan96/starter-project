@@ -5,6 +5,9 @@ import { Slider } from "./slider"
 const meta = {
   component: Slider,
   tags: ["ai-generated"],
+  args: {
+    "aria-label": "Volume",
+  },
   render: (args) => (
     <div className="w-64">
       <Slider {...args} />

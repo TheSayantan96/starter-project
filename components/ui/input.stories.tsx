@@ -42,5 +42,5 @@ export const Typing: Story = {
 }
 
 export const FileInput: Story = {
-  args: { type: "file", placeholder: undefined },
+  args: { type: "file", placeholder: undefined, "aria-label": "Upload file" },
 }

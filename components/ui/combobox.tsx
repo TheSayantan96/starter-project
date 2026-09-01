@@ -68,13 +68,14 @@ function ComboboxInput({
       />
       <InputGroupAddon align="inline-end">
         {showTrigger && (
-          <InputGroupButton
-            size="icon-xs"
-            variant="ghost"
-            render={<ComboboxTrigger />}
-            data-slot="input-group-button"
-            className="group-has-data-[slot=combobox-clear]/input-group:hidden data-pressed:bg-transparent"
-            disabled={disabled}
+          // Rendered as a decorative icon, not an interactive ComboboxTrigger:
+          // Base UI's modal focus manager only exempts the input/popup from
+          // its "hide everything else" pass while open, so a separate
+          // focusable trigger button here would end up aria-hidden yet still
+          // natively focusable. Clicking the input already opens the popup.
+          <ChevronDownIcon
+            aria-hidden="true"
+            className="group-has-data-[slot=combobox-clear]/input-group:hidden"
           />
         )}
         {showClear && <ComboboxClear disabled={disabled} />}

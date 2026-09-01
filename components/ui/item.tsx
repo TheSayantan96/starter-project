@@ -6,17 +6,21 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
 
+const ItemGroupContext = React.createContext(false)
+
 function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div
-      role="list"
-      data-slot="item-group"
-      className={cn(
-        "group/item-group flex w-full flex-col gap-4 has-data-[size=sm]:gap-2.5 has-data-[size=xs]:gap-2",
-        className
-      )}
-      {...props}
-    />
+    <ItemGroupContext.Provider value={true}>
+      <div
+        role="list"
+        data-slot="item-group"
+        className={cn(
+          "group/item-group flex w-full flex-col gap-4 has-data-[size=sm]:gap-2.5 has-data-[size=xs]:gap-2",
+          className
+        )}
+        {...props}
+      />
+    </ItemGroupContext.Provider>
   )
 }
 
@@ -28,6 +32,7 @@ function ItemSeparator({
     <Separator
       data-slot="item-separator"
       orientation="horizontal"
+      aria-hidden="true"
       className={cn("my-2", className)}
       {...props}
     />
@@ -63,10 +68,12 @@ function Item({
   render,
   ...props
 }: useRender.ComponentProps<"div"> & VariantProps<typeof itemVariants>) {
+  const inGroup = React.useContext(ItemGroupContext)
   return useRender({
     defaultTagName: "div",
     props: mergeProps<"div">(
       {
+        role: inGroup ? "listitem" : undefined,
         className: cn(itemVariants({ variant, size, className })),
       },
       props
