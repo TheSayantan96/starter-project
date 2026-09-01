@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
-import { expect } from "storybook/test"
+import { expect, waitFor } from "storybook/test"
 
 import { Bubble, BubbleContent } from "./bubble"
 import { Message, MessageContent } from "./message"
@@ -60,6 +60,8 @@ export const Default: Story = {
     </MessageScrollerProvider>
   ),
   play: async ({ canvas }) => {
-    await expect(canvas.getByText("Awesome, see you at 3!")).toBeVisible()
+    await waitFor(() =>
+      expect(canvas.getByText("Awesome, see you at 3!")).toBeVisible()
+    )
   },
 }

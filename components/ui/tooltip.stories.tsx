@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
-import { expect, userEvent, waitFor, within } from "storybook/test"
+import { expect, waitFor, within } from "storybook/test"
 
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip"
 import { Button } from "./button"
@@ -14,17 +14,15 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
-    <Tooltip>
-      <TooltipTrigger render={<Button variant="outline">Hover me</Button>} />
+    <Tooltip defaultOpen defaultTriggerId="tooltip-default-trigger">
+      <TooltipTrigger
+        id="tooltip-default-trigger"
+        render={<Button variant="outline">Hover me</Button>}
+      />
       <TooltipContent>Add to library</TooltipContent>
     </Tooltip>
   ),
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    const trigger = canvas.getByRole("button", { name: "Hover me" })
-
-    await userEvent.hover(trigger)
-
     const body = within(canvasElement.ownerDocument.body)
     await waitFor(() => expect(body.getByText("Add to library")).toBeVisible())
   },
