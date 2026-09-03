@@ -79,7 +79,10 @@ export function Feed() {
                   <Repeat2Icon className="size-[18px]" />
                   {post.reposts}
                 </button>
-                <button className="text-muted-foreground hover:text-foreground">
+                <button
+                  aria-label="Share post"
+                  className="text-muted-foreground hover:text-foreground"
+                >
                   <SendIcon className="size-[18px]" />
                 </button>
               </div>
