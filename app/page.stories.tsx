@@ -4,6 +4,7 @@ import { expect } from "storybook/test"
 import Page from "./page"
 
 const meta = {
+  title: "Pages/Home",
   component: Page,
   tags: ["ai-generated"],
 } satisfies Meta<typeof Page>
