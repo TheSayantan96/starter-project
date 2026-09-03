@@ -52,6 +52,8 @@
     --color-action-primary-hover: var(--action-primary-hover);
     --color-action-primary-foreground: var(--action-primary-foreground);
     --color-action-primary-text: var(--action-primary-text);
+    --color-action-primary-surface: var(--action-primary-surface);
+    --color-action-primary-surface-border: var(--action-primary-surface-border);
     --color-destructive-solid: var(--destructive-solid);
     --color-selected-surface: var(--selected-surface);
     --color-selected-foreground: var(--selected-foreground);
@@ -159,9 +161,14 @@
     --action-primary: var(--tm-orange-9);
     --action-primary-hover: var(--tm-orange-10);
     --action-primary-foreground: #ffffff;
-    /* Orange/11 — AA-safe brand-colored text on a light surface (not for use
-       as a solid-fill foreground; that's --action-primary-foreground above). */
+    /* Orange/12 — AA-safe brand-colored text on a light surface (Orange/11
+       measured at 4.28:1, just under AA; not for use as a solid-fill
+       foreground — that's --action-primary-foreground above). */
     --action-primary-text: var(--tm-orange-12);
+    /* primary-surface Button variant: a subtle, subordinate tint — always
+       lighter than the solid fill above. */
+    --action-primary-surface: var(--tm-orange-2);
+    --action-primary-surface-border: var(--tm-orange-3);
 
     --selected-surface: var(--tm-orange-4);
     --selected-foreground: var(--tm-orange-12);
@@ -266,6 +273,8 @@
     --action-primary-hover: #ef5f00;
     --action-primary-foreground: #ffffff;
     --action-primary-text: var(--tm-orange-12);
+    --action-primary-surface: var(--tm-orange-2);
+    --action-primary-surface-border: var(--tm-orange-3);
 
     --selected-surface: var(--tm-orange-4);
     --selected-foreground: var(--tm-orange-12);

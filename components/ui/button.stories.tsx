@@ -51,12 +51,13 @@ export const Disabled: Story = {
   },
 }
 
-// Button uses `rounded-4xl` -> --radius-4xl: calc(var(--radius) * 2.6) = 1.625rem (26px)
-// fails if Tailwind / the shadcn theme tokens did not load.
+// Button uses `rounded-tm-full` -> --radius-tm-full: 9999px (TagMango's
+// canonical pill radius). Fails if Tailwind / the TagMango theme tokens
+// did not load.
 export const CssCheck: Story = {
   parameters: knownActionContrastException,
   play: async ({ canvas }) => {
     const button = canvas.getByRole("button", { name: "Button" })
-    await expect(getComputedStyle(button).borderRadius).toBe("26px")
+    await expect(getComputedStyle(button).borderRadius).toBe("9999px")
   },
 }
