@@ -22,7 +22,7 @@ export const Default: Story = {
         </span>
         <CollapsibleTrigger
           render={
-            <Button variant="ghost" size="icon">
+            <Button variant="neutral-ghost" size="icon">
               <ChevronsUpDownIcon />
               <span className="sr-only">Toggle</span>
             </Button>
@@ -58,7 +58,7 @@ export const InitiallyOpen: Story = {
         <span className="text-sm font-medium">Advanced settings</span>
         <CollapsibleTrigger
           render={
-            <Button variant="ghost" size="icon">
+            <Button variant="neutral-ghost" size="icon">
               <ChevronsUpDownIcon />
               <span className="sr-only">Toggle</span>
             </Button>

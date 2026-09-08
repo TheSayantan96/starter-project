@@ -65,6 +65,7 @@
     --color-info: var(--info);
     --color-info-bg: var(--info-bg);
     --color-destructive-bg: var(--destructive-bg);
+    --color-destructive-solid: var(--destructive-solid);
     --color-focus-ring: var(--focus-ring);
 
     --radius-sm: calc(var(--radius) * 0.6);
@@ -208,6 +209,12 @@
        a real AA failure in the first pass). */
     --destructive: var(--tm-tomato-12);
     --destructive-bg: var(--tm-tomato-2);
+    /* Pinned to the same value in both themes — like --action-primary — so a
+       solid destructive fill stays a recognizable, fixed "danger red"
+       regardless of theme, rather than flipping with the ramp the way the
+       text-safe --destructive above deliberately does. Verified 4.99:1 with
+       white text. */
+    --destructive-solid: #d13415;
     --border: var(--tm-sand-4);
     --input: var(--border-strong); /* form fields use the stronger border step, per artifact */
     --ring: var(--tm-orange-12); /* focus */
@@ -309,6 +316,7 @@
     --accent-foreground: var(--foreground);
     --destructive: var(--tm-tomato-12);
     --destructive-bg: var(--tm-tomato-2);
+    --destructive-solid: #d13415;
     --border: var(--tm-sand-5);
     --input: var(--border-strong);
     --ring: var(--tm-orange-12); /* focus */

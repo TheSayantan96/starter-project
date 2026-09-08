@@ -97,10 +97,13 @@ export const NeutralSurfaceIcon: Story = {
 }
 
 // ============================================================
-// SEMANTIC
+// SEMANTIC — mirrors the primary-solid/-surface split
 // ============================================================
 
-export const Destructive: Story = { args: { variant: "destructive" } }
+export const DestructiveSolid: Story = { args: { variant: "destructive-solid" } }
+export const DestructiveSurface: Story = {
+  args: { variant: "destructive-surface" },
+}
 
 // ============================================================
 // GLASS — Button variants, not a separate component
@@ -110,17 +113,17 @@ export const GlassPrimary: Story = { args: { variant: "glass-primary" } }
 export const GlassAdaptive: Story = { args: { variant: "glass-adaptive" } }
 
 // ============================================================
-// LEGACY COMPATIBILITY — retained for existing call sites during the
-// staged migration (EXTEND -> ALIAS -> MIGRATE -> DEPRECATE -> REMOVE).
-// `default` and `ghost` are literal aliases of primary-solid/neutral-ghost
-// (see button.tsx); outline/secondary/link are unchanged pending further
-// usage evidence (see Phase D audit in the project history — secondary
-// and link both have zero usages in product code today).
+// LEGACY — kept outside the TagMango naming scheme, not as aliases of
+// anything else here. `outline` has no TagMango equivalent and 49 real
+// call sites (migrating it is a separate, much larger effort than this
+// pass); `link` has zero usages today but is a genuinely distinct pattern.
+// The former `default`/`ghost`/`secondary`/`destructive` names are gone
+// entirely — each was either byte-identical to a canonical name
+// (default→primary-solid, ghost→neutral-ghost) or unused and undecided
+// (secondary); all real call sites were migrated to the canonical names.
 // ============================================================
 
 export const Outline: Story = { args: { variant: "outline" } }
-export const Secondary: Story = { args: { variant: "secondary" } }
-export const Ghost: Story = { args: { variant: "ghost" } }
 export const Link: Story = { args: { variant: "link" } }
 
 // ============================================================

@@ -70,7 +70,7 @@ export const Error: Story = {
   render: () => (
     <Toaster>
       <Button
-        variant="destructive"
+        variant="destructive-surface"
         onClick={() =>
           toast.add({
             title: "Something went wrong",

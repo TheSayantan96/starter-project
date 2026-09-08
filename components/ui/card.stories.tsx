@@ -57,7 +57,7 @@ export const WithAction: Story = {
         <CardTitle>Notifications</CardTitle>
         <CardDescription>Manage how you receive alerts.</CardDescription>
         <CardAction>
-          <Button variant="ghost" size="sm">
+          <Button variant="neutral-ghost" size="sm">
             Edit
           </Button>
         </CardAction>

@@ -115,7 +115,7 @@ export const WithoutCloseButton: Story = {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter showCloseButton>
-          <Button variant="destructive">Delete</Button>
+          <Button variant="destructive-solid">Delete</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -151,7 +151,7 @@ function AttachmentAction({
   return (
     <Button
       data-slot="attachment-action"
-      variant={variant ?? "ghost"}
+      variant={variant ?? "neutral-ghost"}
       size={size}
       className={cn(className)}
       {...props}

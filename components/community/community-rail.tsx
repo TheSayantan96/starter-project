@@ -22,7 +22,7 @@ export function CommunityRail() {
       {railItems.map(({ icon: Icon, label, active }) => (
         <Button
           key={label}
-          variant={active ? "secondary" : "ghost"}
+          variant={active ? "neutral-surface" : "neutral-ghost"}
           size="icon"
           aria-label={label}
         >

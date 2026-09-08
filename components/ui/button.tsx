@@ -3,47 +3,43 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-// TagMango canonical variants. `default` and `ghost` are kept as compatibility
-// aliases for existing call sites (EXTEND -> ALIAS -> MIGRATE -> DEPRECATE,
-// per the Visual Foundations v0.1 migration strategy) — their class strings
-// are intentionally identical to primary-solid / neutral-ghost, not just
-// visually similar, so the alias can be retired later with zero visual diff.
-const primarySolid =
-  "bg-action-primary text-action-primary-foreground hover:bg-action-primary-hover"
-const neutralGhost =
-  "text-muted-foreground hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50"
-
+// TagMango canonical Button variants. Every intent gets exactly one name —
+// no bare "default"/"ghost"/"destructive" aliases duplicating a canonical
+// name with identical CSS (that's what "neutral-ghost" vs "ghost" used to
+// be). `outline` and `link` are the only two kept outside the naming
+// scheme: `outline` has no TagMango equivalent and 49 real call sites;
+// `link` has zero usages today but is a genuinely distinct pattern, not a
+// duplicate of anything else here.
 const buttonVariants = cva(
   "group/button inline-flex shrink-0 items-center justify-center rounded-tm-full border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
-        // legacy shadcn variants — compatibility aliases, retained as-is
-        // until product usage is migrated (see button.tsx module comment)
-        default: primarySolid,
+        // legacy — no TagMango equivalent (outline) or currently unused but
+        // distinct (link); kept as-is rather than folded into anything
         outline:
           "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:bg-transparent dark:hover:bg-input/30",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
-        ghost: neutralGhost,
         link: "text-action-primary-text underline-offset-4 hover:underline",
 
         // CORE
-        "primary-solid": primarySolid,
+        "primary-solid":
+          "bg-action-primary text-action-primary-foreground hover:bg-action-primary-hover",
         "primary-surface":
           "bg-action-primary-surface border-action-primary-surface-border text-action-primary-text hover:bg-action-primary-surface-border/60",
 
         // NEUTRAL
-        "neutral-solid":
-          "bg-foreground text-surface hover:bg-ink-soft",
+        "neutral-solid": "bg-foreground text-surface hover:bg-ink-soft",
         "neutral-elevated":
           "bg-surface-raised border-border-strong text-foreground shadow-tm-1 hover:bg-surface-sunken",
         "neutral-surface":
           "bg-surface-sunken border-border text-foreground hover:bg-border",
-        "neutral-ghost": neutralGhost,
+        "neutral-ghost":
+          "text-muted-foreground hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
 
-        // SEMANTIC
-        destructive:
+        // SEMANTIC — mirrors the primary-solid/-surface split
+        "destructive-solid":
+          "bg-destructive-solid text-white hover:bg-[color-mix(in_srgb,var(--destructive-solid),black_12%)]",
+        "destructive-surface":
           "bg-destructive-bg text-destructive hover:bg-[color-mix(in_srgb,var(--destructive-bg),var(--destructive)_12%)] focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
 
         // GLASS — a Button variant, not a separate component. Both derive
@@ -69,7 +65,7 @@ const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "primary-solid",
       size: "default",
     },
   }
@@ -77,7 +73,7 @@ const buttonVariants = cva(
 
 function Button({
   className,
-  variant = "default",
+  variant = "primary-solid",
   size = "default",
   ...props
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
