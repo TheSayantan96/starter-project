@@ -19,7 +19,14 @@ const toggleVariants = cva(
         // community-rail's nav treatment, so "selected" reads the same
         // way everywhere. Orange/4 fill is a soft tint, not the vivid
         // Orange/9 of primary-solid, so it doesn't compete with a CTA.
-        chip: "border border-border bg-surface-sunken text-muted-foreground hover:bg-border hover:text-foreground aria-pressed:border-selected-border aria-pressed:bg-selected-surface aria-pressed:text-selected-foreground aria-pressed:hover:bg-selected-surface data-[state=on]:border-selected-border data-[state=on]:bg-selected-surface data-[state=on]:text-selected-foreground data-[state=on]:hover:bg-selected-surface",
+        // Polish pass: selected adds border-2 (up from the resting 1px) and
+        // font-semibold (up from the shared base's font-medium) on top of
+        // the existing selected-surface/-foreground/-border tokens, so a
+        // selected chip is unmistakable while scanning without approaching
+        // primary-solid's vivid Orange/9 fill -- still just a firmer Orange/4
+        // tint. Strengthens the existing selected-* relationship rather
+        // than adding a new token or a decorative element (e.g. a checkmark).
+        chip: "border border-border bg-surface-sunken text-muted-foreground hover:bg-border hover:text-foreground aria-pressed:border-2 aria-pressed:border-selected-border aria-pressed:bg-selected-surface aria-pressed:text-selected-foreground aria-pressed:font-semibold aria-pressed:hover:bg-selected-surface data-[state=on]:border-2 data-[state=on]:border-selected-border data-[state=on]:bg-selected-surface data-[state=on]:text-selected-foreground data-[state=on]:font-semibold data-[state=on]:hover:bg-selected-surface",
       },
       size: {
         default:

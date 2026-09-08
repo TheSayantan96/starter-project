@@ -32,8 +32,15 @@ const buttonVariants = cva(
         "neutral-solid": "bg-foreground text-surface hover:bg-ink-soft",
         "neutral-elevated":
           "bg-surface-raised border-border-strong text-foreground shadow-tm-1 hover:bg-surface-sunken",
+        // Polish pass: --surface-sunken (dark) sits below --background on
+        // purpose (see globals.css) so it stays a real "sunken" surface for
+        // muted/accent/Tabs -- but that means it reads as *darker* than the
+        // page in dark mode, not "visibly filled". A dark-only foreground
+        // wash keeps this variant flatter than neutral-elevated (no border-
+        // strong, no shadow) while still reading as a filled control,
+        // without touching the shared surface-sunken token.
         "neutral-surface":
-          "bg-surface-sunken border-border text-foreground hover:bg-border",
+          "bg-surface-sunken border-border text-foreground hover:bg-border dark:bg-foreground/3 dark:hover:bg-foreground/8",
         "neutral-ghost":
           "text-muted-foreground hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
 
@@ -48,8 +55,16 @@ const buttonVariants = cva(
         // brand-color change propagates here automatically.
         "glass-primary":
           "relative isolate border-white/50 text-white [text-shadow:0_1px_2px_rgba(90,24,8,0.5)] bg-[linear-gradient(135deg,color-mix(in_oklch,var(--action-primary)_65%,white)_0%,var(--action-primary)_46%,color-mix(in_oklch,var(--action-primary)_85%,black)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.82),inset_0_-1px_0_rgba(93,20,8,0.22),0_8px_18px_rgba(247,107,21,0.28),0_2px_4px_rgba(0,0,0,0.2)] before:pointer-events-none before:absolute before:inset-x-[7px] before:top-px before:h-[42%] before:rounded-tm-full before:bg-gradient-to-b before:from-white/40 before:to-transparent hover:brightness-105 hover:saturate-110 hover:-translate-y-px",
+        // Polish pass, dark mode only: the fill tinted toward --background
+        // (light in light mode, so it reads as a frosted haze) tints toward
+        // near-black in dark mode -- a dark tint on a dark button is nearly
+        // invisible, which is why this read as "another neutral button".
+        // dark: overrides tint toward --foreground instead (a pale haze,
+        // the same way frosted glass over a dark room catches ambient
+        // light) and lift the top inset highlight a little. Light mode,
+        // geometry, blur amount, and hover motion are untouched.
         "glass-adaptive":
-          "relative isolate text-foreground border-[color-mix(in_srgb,var(--foreground)_20%,transparent)] bg-[linear-gradient(-75deg,color-mix(in_oklch,var(--background)_5%,transparent),color-mix(in_oklch,var(--background)_20%,transparent),color-mix(in_oklch,var(--background)_5%,transparent))] shadow-[inset_0_2px_2px_color-mix(in_srgb,var(--foreground)_5%,transparent),inset_0_-2px_2px_color-mix(in_srgb,var(--background)_50%,transparent),0_4px_2px_-2px_color-mix(in_srgb,var(--foreground)_20%,transparent),0_0_2px_4px_inset_color-mix(in_srgb,var(--background)_20%,transparent)] backdrop-blur-[3px] hover:-translate-y-px hover:backdrop-blur-[1px] hover:shadow-[inset_0_2px_2px_color-mix(in_srgb,var(--foreground)_5%,transparent),inset_0_-2px_2px_color-mix(in_srgb,var(--background)_50%,transparent),0_2px_1px_-2px_color-mix(in_srgb,var(--foreground)_25%,transparent),0_0_1px_2px_inset_color-mix(in_srgb,var(--background)_50%,transparent)]",
+          "relative isolate text-foreground border-[color-mix(in_srgb,var(--foreground)_20%,transparent)] bg-[linear-gradient(-75deg,color-mix(in_oklch,var(--background)_5%,transparent),color-mix(in_oklch,var(--background)_20%,transparent),color-mix(in_oklch,var(--background)_5%,transparent))] dark:bg-[linear-gradient(-75deg,color-mix(in_oklch,var(--foreground)_6%,transparent),color-mix(in_oklch,var(--foreground)_16%,transparent),color-mix(in_oklch,var(--foreground)_6%,transparent))] shadow-[inset_0_2px_2px_color-mix(in_srgb,var(--foreground)_5%,transparent),inset_0_-2px_2px_color-mix(in_srgb,var(--background)_50%,transparent),0_4px_2px_-2px_color-mix(in_srgb,var(--foreground)_20%,transparent),0_0_2px_4px_inset_color-mix(in_srgb,var(--background)_20%,transparent)] dark:shadow-[inset_0_2px_2px_color-mix(in_srgb,var(--foreground)_14%,transparent),inset_0_-2px_2px_color-mix(in_srgb,var(--background)_50%,transparent),0_4px_2px_-2px_color-mix(in_srgb,var(--foreground)_20%,transparent),0_0_2px_4px_inset_color-mix(in_srgb,var(--background)_20%,transparent)] backdrop-blur-[3px] hover:-translate-y-px hover:backdrop-blur-[1px] hover:shadow-[inset_0_2px_2px_color-mix(in_srgb,var(--foreground)_5%,transparent),inset_0_-2px_2px_color-mix(in_srgb,var(--background)_50%,transparent),0_2px_1px_-2px_color-mix(in_srgb,var(--foreground)_25%,transparent),0_0_1px_2px_inset_color-mix(in_srgb,var(--background)_50%,transparent)] dark:hover:shadow-[inset_0_2px_2px_color-mix(in_srgb,var(--foreground)_18%,transparent),inset_0_-2px_2px_color-mix(in_srgb,var(--background)_50%,transparent),0_2px_1px_-2px_color-mix(in_srgb,var(--foreground)_25%,transparent),0_0_1px_2px_inset_color-mix(in_srgb,var(--background)_50%,transparent)]",
       },
       size: {
         // TagMango: all normal (non-icon) buttons are 40px by default.
