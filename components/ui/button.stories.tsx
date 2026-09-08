@@ -76,6 +76,26 @@ export const PrimarySurface: Story = {
   args: { variant: "primary-surface" },
 }
 
+// Leaves the pointer hovered / the button pressed-and-held at the end of
+// the play function, so the story's own canvas shows the live state, not
+// just an assertion.
+export const Hover: Story = {
+  args: { variant: "primary-solid" },
+  parameters: knownActionContrastException,
+  play: async ({ canvas }) => {
+    await userEvent.hover(canvas.getByRole("button", { name: "Button" }))
+  },
+}
+
+export const Pressed: Story = {
+  args: { variant: "primary-solid" },
+  parameters: knownActionContrastException,
+  play: async ({ canvas }) => {
+    const button = canvas.getByRole("button", { name: "Button" })
+    await userEvent.pointer({ keys: "[MouseLeft>]", target: button })
+  },
+}
+
 // ============================================================
 // NEUTRAL
 // ============================================================

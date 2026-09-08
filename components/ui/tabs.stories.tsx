@@ -67,6 +67,23 @@ export const Vertical: Story = {
   ),
 }
 
+export const FocusVisible: Story = {
+  render: () => (
+    <Tabs defaultValue="account" className="w-80">
+      <TabsList>
+        <TabsTrigger value="account">Account</TabsTrigger>
+        <TabsTrigger value="password">Password</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">Account content.</TabsContent>
+      <TabsContent value="password">Password content.</TabsContent>
+    </Tabs>
+  ),
+  play: async ({ canvas }) => {
+    await userEvent.tab()
+    await expect(canvas.getByRole("tab", { name: "Account" })).toHaveFocus()
+  },
+}
+
 export const DisabledTab: Story = {
   render: () => (
     <Tabs defaultValue="draft" className="w-80">
