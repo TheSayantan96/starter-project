@@ -2,6 +2,7 @@ import { Button as ButtonPrimitive } from "@base-ui/react/button"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
+import { Spinner } from "./spinner"
 
 // TagMango canonical Button variants. Every intent gets exactly one name —
 // no bare "default"/"ghost"/"destructive" aliases duplicating a canonical
@@ -75,15 +76,45 @@ function Button({
   className,
   variant = "primary-solid",
   size = "default",
+  loading = false,
+  disabled,
+  children,
   ...props
-}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+}: ButtonPrimitive.Props &
+  VariantProps<typeof buttonVariants> & { loading?: boolean }) {
   return (
     <ButtonPrimitive
       data-slot="button"
       data-variant={variant}
-      className={cn(buttonVariants({ variant, size, className }))}
+      data-loading={loading || undefined}
+      aria-busy={loading || undefined}
+      disabled={disabled || loading}
+      className={cn(
+        buttonVariants({ variant, size, className }),
+        // Loading keeps the button's own variant color at full strength
+        // (disabled:opacity-50 above is for genuine disabled, not busy) and
+        // gives the absolutely-positioned Spinner below a positioning
+        // context, without touching layout for the non-loading case.
+        "data-loading:relative data-loading:opacity-100!"
+      )}
       {...props}
-    />
+    >
+      {/* display:contents keeps `children` as direct flex items of the
+          button (preserving its existing gap/has-data-[icon] spacing rules)
+          while still being one node `invisible` can target; visibility
+          (unlike opacity) still hides content correctly through
+          display:contents, and the hidden text keeps reserving its layout
+          space so the button's dimensions don't change while loading. */}
+      <span className="contents data-loading:invisible" data-loading={loading || undefined}>
+        {children}
+      </span>
+      {loading && (
+        // Not aria-hidden: Spinner's own role="status" aria-label="Loading"
+        // is what gives the button a discernible accessible name once its
+        // own label is hidden above -- axe's button-name check requires it.
+        <Spinner className="absolute size-4 animate-spin" />
+      )}
+    </ButtonPrimitive>
   )
 }
 

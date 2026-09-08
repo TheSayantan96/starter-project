@@ -113,6 +113,57 @@ export const GlassPrimary: Story = { args: { variant: "glass-primary" } }
 export const GlassAdaptive: Story = { args: { variant: "glass-adaptive" } }
 
 // ============================================================
+// LOADING — same Button primitive, no separate LoadingButton. Dimensions
+// stay stable (label is hidden, not removed, so it keeps its layout space);
+// interaction is blocked via the native disabled attribute; aria-busy is
+// exposed on the button itself.
+// ============================================================
+
+export const LoadingPrimarySolid: Story = {
+  args: { variant: "primary-solid", loading: true },
+  parameters: knownActionContrastException,
+  play: async ({ canvas }) => {
+    // The label is visually (and so accessibly) hidden while loading, by
+    // design -- query by role alone rather than by name.
+    const button = canvas.getByRole("button")
+    await expect(button).toHaveAttribute("aria-busy", "true")
+    await expect(button).toBeDisabled()
+  },
+}
+
+export const LoadingNeutralSurface: Story = {
+  args: { variant: "neutral-surface", loading: true },
+}
+
+export const LoadingDestructive: Story = {
+  args: { variant: "destructive-solid", children: "Delete", loading: true },
+}
+
+// Regression guard for "no layout shift while loading": a resting and a
+// loading button with identical children must measure the same width.
+export const LoadingDimensionsStable: Story = {
+  render: () => (
+    <div className="flex gap-4">
+      <Button data-testid="resting">Save changes</Button>
+      <Button data-testid="loading" loading>
+        Save changes
+      </Button>
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    const resting = canvas.getByTestId("resting")
+    const loading = canvas.getByTestId("loading")
+    await expect(loading.getBoundingClientRect().width).toBeCloseTo(
+      resting.getBoundingClientRect().width,
+      0
+    )
+    await expect(loading.getBoundingClientRect().height).toBe(
+      resting.getBoundingClientRect().height
+    )
+  },
+}
+
+// ============================================================
 // LEGACY — kept outside the TagMango naming scheme, not as aliases of
 // anything else here. `outline` has no TagMango equivalent and 49 real
 // call sites (migrating it is a separate, much larger effort than this
