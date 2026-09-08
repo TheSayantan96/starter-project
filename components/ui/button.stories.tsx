@@ -23,6 +23,50 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+// One consolidated matrix of real <Button> instances -- canonical variants,
+// loading, and icon composition -- for the v0.1 visual review board. Real
+// components, not a hand-reconstructed class-string approximation.
+export const AllVariants: Story = {
+  parameters: knownActionContrastException,
+  render: () => (
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-wrap items-center gap-3">
+        <Button variant="primary-solid">Primary solid</Button>
+        <Button variant="primary-surface">Primary surface</Button>
+        <Button variant="neutral-solid">Neutral solid</Button>
+        <Button variant="neutral-elevated">Neutral elevated</Button>
+        <Button variant="neutral-surface">Neutral surface</Button>
+        <Button variant="neutral-ghost">Neutral ghost</Button>
+        <Button variant="destructive-solid">Destructive solid</Button>
+        <Button variant="destructive-surface">Destructive surface</Button>
+        <Button variant="glass-primary">Glass primary</Button>
+        <Button variant="glass-adaptive">Glass adaptive</Button>
+        <Button variant="outline">Outline</Button>
+      </div>
+      <div className="flex flex-wrap items-center gap-3">
+        <Button variant="primary-solid" loading>
+          Save
+        </Button>
+        <Button variant="neutral-surface" loading>
+          Save
+        </Button>
+        <Button variant="destructive-solid" loading>
+          Delete
+        </Button>
+      </div>
+      <div className="flex flex-wrap items-center gap-3">
+        <Button variant="neutral-surface" size="icon" aria-label="Settings">
+          <SettingsIcon />
+        </Button>
+        <Button variant="primary-solid">
+          <SettingsIcon data-icon="inline-start" />
+          Settings
+        </Button>
+      </div>
+    </div>
+  ),
+}
+
 export const Default: Story = {
   parameters: knownActionContrastException,
   play: async ({ canvas }) => {
