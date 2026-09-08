@@ -44,7 +44,7 @@ const buttonVariants = cva(
 
         // SEMANTIC
         destructive:
-          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
+          "bg-destructive-bg text-destructive hover:bg-[color-mix(in_srgb,var(--destructive-bg),var(--destructive)_12%)] focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
 
         // GLASS — a Button variant, not a separate component. Both derive
         // their gradient/tint from tokens (never hardcoded hex) so a future

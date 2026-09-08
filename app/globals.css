@@ -54,7 +54,6 @@
     --color-action-primary-text: var(--action-primary-text);
     --color-action-primary-surface: var(--action-primary-surface);
     --color-action-primary-surface-border: var(--action-primary-surface-border);
-    --color-destructive-solid: var(--destructive-solid);
     --color-selected-surface: var(--selected-surface);
     --color-selected-foreground: var(--selected-foreground);
     --color-selected-border: var(--selected-border);
@@ -182,11 +181,6 @@
     --info: var(--tm-blue-11);
     --info-bg: var(--tm-blue-2);
 
-    /* Tomato/12 for text (AA-safe on tomato-tinted surfaces, matches the
-       --warning/--warning-solid split above); Tomato/11 reserved for a
-       future solid-fill destructive treatment paired with white text. */
-    --destructive-solid: var(--tm-tomato-11);
-
     --background: var(--tm-sand-2); /* canvas */
     --foreground: var(--tm-sand-12); /* ink */
     --card: var(--surface);
@@ -201,6 +195,17 @@
     --muted-foreground: var(--ink-soft);
     --accent: var(--surface-sunken); /* matches pre-existing repo convention: accent == muted */
     --accent-foreground: var(--foreground);
+    /* Tomato/12 — matches the artifact's own "Feedback role scales" demo
+       exactly (#5c271f is its literal label color for the Error scale once
+       the surface isn't the lightest tint). Tomato/11 (the vivid Error/11
+       identifier, #D13415) only clears AA against the dedicated Tomato/2
+       card background (4.75:1) — but text-destructive also gets inherited
+       onto plain neutral surfaces (e.g. Field's wrapper cascades it onto an
+       invalid input), where it drops to ~4.1:1 and fails. Tomato/12 clears
+       AA in every context, which is what makes one token usable everywhere
+       (bg-destructive-bg + text-destructive, never an opacity-derived tint
+       like bg-destructive/10 — that's what produced both a duller color and
+       a real AA failure in the first pass). */
     --destructive: var(--tm-tomato-12);
     --destructive-bg: var(--tm-tomato-2);
     --border: var(--tm-sand-4);
@@ -304,7 +309,6 @@
     --accent-foreground: var(--foreground);
     --destructive: var(--tm-tomato-12);
     --destructive-bg: var(--tm-tomato-2);
-    --destructive-solid: var(--tm-tomato-11);
     --border: var(--tm-sand-5);
     --input: var(--border-strong);
     --ring: var(--tm-orange-12); /* focus */
