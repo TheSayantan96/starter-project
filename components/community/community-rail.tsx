@@ -4,6 +4,7 @@ import { BellIcon, HouseIcon, SearchIcon, SquarePenIcon, UserIcon } from "lucide
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 const railItems = [
   { icon: HouseIcon, label: "For you", active: true },
@@ -22,9 +23,13 @@ export function CommunityRail() {
       {railItems.map(({ icon: Icon, label, active }) => (
         <Button
           key={label}
-          variant={active ? "neutral-surface" : "neutral-ghost"}
+          variant="neutral-ghost"
           size="icon"
           aria-label={label}
+          className={cn(
+            active &&
+              "bg-selected-surface text-selected-foreground hover:bg-selected-surface [&_svg]:stroke-[2.25]"
+          )}
         >
           <Icon />
         </Button>
