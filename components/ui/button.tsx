@@ -40,7 +40,7 @@ const buttonVariants = cva(
         "destructive-solid":
           "bg-destructive-solid text-white hover:bg-[color-mix(in_srgb,var(--destructive-solid),black_12%)]",
         "destructive-surface":
-          "bg-destructive-bg text-destructive hover:bg-[color-mix(in_srgb,var(--destructive-bg),var(--destructive)_12%)] focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
+          "bg-destructive-bg text-destructive-text hover:bg-[color-mix(in_srgb,var(--destructive-bg),var(--destructive-text)_12%)] focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
 
         // GLASS — a Button variant, not a separate component. Both derive
         // their gradient/tint from tokens (never hardcoded hex) so a future

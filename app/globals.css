@@ -66,6 +66,7 @@
     --color-info-bg: var(--info-bg);
     --color-destructive-bg: var(--destructive-bg);
     --color-destructive-solid: var(--destructive-solid);
+    --color-destructive-text: var(--destructive-text);
     --color-focus-ring: var(--focus-ring);
 
     --radius-sm: calc(var(--radius) * 0.6);
@@ -215,6 +216,20 @@
        text-safe --destructive above deliberately does. Verified 4.99:1 with
        white text. */
     --destructive-solid: #d13415;
+    /* Tomato/11 — for text that already sits on the dedicated
+       --destructive-bg tint (Button/Badge/Alert/Bubble/Attachment's error
+       icon). Tomato/12 (--destructive) reads as generic dark brown here —
+       at that depth it's nearly indistinguishable from Orange/12 (the
+       "link" variant's color), which is exactly the bug this fixes.
+       Tomato/11 is visibly red instead, and still clears AA against
+       Tomato/2 (4.75:1) — verified only for that specific pairing, unlike
+       --destructive-solid above this isn't pinned, so dark mode gets
+       Tomato/12's dark-mode value (a light pink, already visibly
+       red/distinct there — the collision is light-mode only). Do NOT use
+       this for text that isn't already on --destructive-bg (e.g. Field's
+       inherited error text, or a menu item's translucent-popover focus
+       state) — those need the darker --destructive for AA. */
+    --destructive-text: var(--tm-tomato-11);
     --border: var(--tm-sand-4);
     --input: var(--border-strong); /* form fields use the stronger border step, per artifact */
     --ring: var(--tm-orange-12); /* focus */
@@ -317,6 +332,10 @@
     --destructive: var(--tm-tomato-12);
     --destructive-bg: var(--tm-tomato-2);
     --destructive-solid: #d13415;
+    /* Dark-mode Tomato/12 is already a light pink — visibly red/distinct
+       from Orange/12 here, so no asymmetric step swap is needed like in
+       light mode (see :root's comment on this token). */
+    --destructive-text: var(--destructive);
     --border: var(--tm-sand-5);
     --input: var(--border-strong);
     --ring: var(--tm-orange-12); /* focus */
