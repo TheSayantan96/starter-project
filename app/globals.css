@@ -232,7 +232,12 @@
     --destructive-text: var(--tm-tomato-11);
     --border: var(--tm-sand-4);
     --input: var(--border-strong); /* form fields use the stronger border step, per artifact */
-    --ring: var(--tm-orange-12); /* focus */
+    /* Orange/12 is the text step (near-black-brown in light, pale cream in
+       dark) -- as a ring/border color it reads as a dull brown/tan smudge,
+       not "TagMango orange". Focus should read as the same brand orange as
+       a solid action button, so this points at --action-primary (Orange/9)
+       instead of the foundation scale directly. */
+    --ring: var(--action-primary); /* focus */
     --focus-ring: var(--ring);
     --chart-1: oklch(0.871 0.006 286.286);
     --chart-2: oklch(0.552 0.016 285.938);
@@ -338,7 +343,12 @@
     --destructive-text: var(--destructive);
     --border: var(--tm-sand-5);
     --input: var(--border-strong);
-    --ring: var(--tm-orange-12); /* focus */
+    /* Orange/12 is the text step (near-black-brown in light, pale cream in
+       dark) -- as a ring/border color it reads as a dull brown/tan smudge,
+       not "TagMango orange". Focus should read as the same brand orange as
+       a solid action button, so this points at --action-primary (Orange/9)
+       instead of the foundation scale directly. */
+    --ring: var(--action-primary); /* focus */
     --focus-ring: var(--ring);
     --chart-1: oklch(0.871 0.006 286.286);
     --chart-2: oklch(0.552 0.016 285.938);
