@@ -327,7 +327,19 @@
     /* TagMango Semantic Tokens — dark */
     --surface: var(--tm-sand-2);
     --surface-raised: var(--tm-sand-3);
-    --surface-sunken: var(--tm-sand-1);
+    /* Sand/1 is already the darkest foundation step -- it's also
+       --background itself below, so a literal var(--tm-sand-1) here made
+       --surface-sunken (and --muted/--accent, which consume it) exactly
+       equal to the page canvas: neutral-surface buttons, Tabs' default
+       track, and every hover:bg-muted/bg-accent state had zero fill
+       contrast against dark backgrounds. Light mode doesn't have this
+       problem (its sunken step, Sand/3, sits on the opposite side of
+       background from Sand/1/raised). Confirmed via computed values
+       (both #111110), not just a screenshot impression -- deepened past
+       Sand/1 with color-mix rather than inventing a new foundation step,
+       the same "darken by a fixed amount" idiom already used for hover
+       states elsewhere in this file. */
+    --surface-sunken: color-mix(in oklch, var(--tm-sand-1), black 12%);
     --surface-overlay: var(--surface-raised);
     --border-strong: var(--tm-sand-7);
     --ink-soft: var(--tm-sand-11);
