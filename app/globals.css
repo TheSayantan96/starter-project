@@ -7,6 +7,41 @@
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: var(--font-sans);
+
+    /* TagMango Visual Foundations v0.1 — semantic typography scale.
+       Inter only (--font-sans above); each role fuses font-size + line-height
+       + weight into one utility (text-display-lg, text-heading-1, ...), the
+       same pattern as the radius-tm and shadow-tm tokens below. display-lg
+       and display-sm use clamp() so they scale down on narrow viewports
+       instead of overflowing a phone-width heading; the rest of the scale is
+       modest enough it doesn't need fluid sizing. Caption's weight is 400
+       per the approved 400-500 range -- pair with font-medium on call sites
+       that want the 500 end. */
+    --text-display-lg: clamp(2rem, 1.55rem + 2.25vw, 3rem); /* 32px -> 48px */
+    --text-display-lg--line-height: 1.08; /* ~52/48 at the 48px ceiling */
+    --text-display-lg--font-weight: 700;
+    --text-display-sm: clamp(1.75rem, 1.4rem + 1.75vw, 2.5rem); /* 28px -> 40px */
+    --text-display-sm--line-height: 1.1; /* ~44/40 at the 40px ceiling */
+    --text-display-sm--font-weight: 700;
+    --text-heading-1: 2rem; /* 32px */
+    --text-heading-1--line-height: 2.5rem; /* 40px */
+    --text-heading-1--font-weight: 700;
+    --text-heading-2: 1.5rem; /* 24px */
+    --text-heading-2--line-height: 2rem; /* 32px */
+    --text-heading-2--font-weight: 600;
+    --text-heading-3: 1.25rem; /* 20px */
+    --text-heading-3--line-height: 1.75rem; /* 28px */
+    --text-heading-3--font-weight: 600;
+    --text-body-lg: 1rem; /* 16px */
+    --text-body-lg--line-height: 1.5rem; /* 24px */
+    --text-body-lg--font-weight: 400;
+    --text-body: 0.875rem; /* 14px */
+    --text-body--line-height: 1.25rem; /* 20px */
+    --text-body--font-weight: 400;
+    --text-caption: 0.75rem; /* 12px */
+    --text-caption--line-height: 1rem; /* 16px */
+    --text-caption--font-weight: 400;
+
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
