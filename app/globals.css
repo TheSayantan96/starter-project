@@ -7,6 +7,41 @@
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: var(--font-sans);
+
+    /* TagMango Visual Foundations v0.1 — semantic typography scale.
+       Inter only (--font-sans above); each role fuses font-size + line-height
+       + weight into one utility (text-display-lg, text-heading-1, ...), the
+       same pattern as the radius-tm and shadow-tm tokens below. display-lg
+       and display-sm use clamp() so they scale down on narrow viewports
+       instead of overflowing a phone-width heading; the rest of the scale is
+       modest enough it doesn't need fluid sizing. Caption's weight is 400
+       per the approved 400-500 range -- pair with font-medium on call sites
+       that want the 500 end. */
+    --text-display-lg: clamp(2rem, 1.55rem + 2.25vw, 3rem); /* 32px -> 48px */
+    --text-display-lg--line-height: 1.08; /* ~52/48 at the 48px ceiling */
+    --text-display-lg--font-weight: 700;
+    --text-display-sm: clamp(1.75rem, 1.4rem + 1.75vw, 2.5rem); /* 28px -> 40px */
+    --text-display-sm--line-height: 1.1; /* ~44/40 at the 40px ceiling */
+    --text-display-sm--font-weight: 700;
+    --text-heading-1: 2rem; /* 32px */
+    --text-heading-1--line-height: 2.5rem; /* 40px */
+    --text-heading-1--font-weight: 700;
+    --text-heading-2: 1.5rem; /* 24px */
+    --text-heading-2--line-height: 2rem; /* 32px */
+    --text-heading-2--font-weight: 600;
+    --text-heading-3: 1.25rem; /* 20px */
+    --text-heading-3--line-height: 1.75rem; /* 28px */
+    --text-heading-3--font-weight: 600;
+    --text-body-lg: 1rem; /* 16px */
+    --text-body-lg--line-height: 1.5rem; /* 24px */
+    --text-body-lg--font-weight: 400;
+    --text-body: 0.875rem; /* 14px */
+    --text-body--line-height: 1.25rem; /* 20px */
+    --text-body--font-weight: 400;
+    --text-caption: 0.75rem; /* 12px */
+    --text-caption--line-height: 1rem; /* 16px */
+    --text-caption--font-weight: 400;
+
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -38,6 +73,37 @@
     --color-card: var(--card);
     --color-foreground: var(--foreground);
     --color-background: var(--background);
+
+    /* TagMango semantic tokens exposed as Tailwind utilities
+       (bg-surface-raised, text-selected-foreground, border-border-strong, etc.) */
+    --color-surface: var(--surface);
+    --color-surface-raised: var(--surface-raised);
+    --color-surface-sunken: var(--surface-sunken);
+    --color-surface-overlay: var(--surface-overlay);
+    --color-border-strong: var(--border-strong);
+    --color-ink-soft: var(--ink-soft);
+    --color-ink-disabled: var(--ink-disabled);
+    --color-action-primary: var(--action-primary);
+    --color-action-primary-hover: var(--action-primary-hover);
+    --color-action-primary-foreground: var(--action-primary-foreground);
+    --color-action-primary-text: var(--action-primary-text);
+    --color-action-primary-surface: var(--action-primary-surface);
+    --color-action-primary-surface-border: var(--action-primary-surface-border);
+    --color-selected-surface: var(--selected-surface);
+    --color-selected-foreground: var(--selected-foreground);
+    --color-selected-border: var(--selected-border);
+    --color-success: var(--success);
+    --color-success-bg: var(--success-bg);
+    --color-warning: var(--warning);
+    --color-warning-solid: var(--warning-solid);
+    --color-warning-bg: var(--warning-bg);
+    --color-info: var(--info);
+    --color-info-bg: var(--info-bg);
+    --color-destructive-bg: var(--destructive-bg);
+    --color-destructive-solid: var(--destructive-solid);
+    --color-destructive-text: var(--destructive-text);
+    --color-focus-ring: var(--focus-ring);
+
     --radius-sm: calc(var(--radius) * 0.6);
     --radius-md: calc(var(--radius) * 0.8);
     --radius-lg: var(--radius);
@@ -45,27 +111,169 @@
     --radius-2xl: calc(var(--radius) * 1.8);
     --radius-3xl: calc(var(--radius) * 2.2);
     --radius-4xl: calc(var(--radius) * 2.6);
+
+    /* TagMango Visual Foundations v0.1 — canonical radius hierarchy.
+       Deliberately NOT derived from --radius (see globals.css audit notes):
+       the existing multiplier chain above is shared by all 61 shadcn
+       primitives and mutating it would silently reshape every one of them. */
+    --radius-tm-sm: 8px;
+    --radius-tm-md: 12px;
+    --radius-tm-lg: 16px;
+    --radius-tm-xl: 24px;
+    --radius-tm-full: 9999px;
+
+    /* TagMango elevation — border-first, restrained (see --tm-shadow-* below). */
+    --shadow-tm-1: var(--tm-shadow-1);
+    --shadow-tm-2: var(--tm-shadow-2);
+    --shadow-tm-3: var(--tm-shadow-3);
 }
 
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.141 0.005 285.823);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.141 0.005 285.823);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.141 0.005 285.823);
-    --primary: oklch(0.852 0.199 91.936);
-    --primary-foreground: oklch(0.421 0.095 57.708);
-    --secondary: oklch(0.967 0.001 286.375);
-    --secondary-foreground: oklch(0.21 0.006 285.885);
-    --muted: oklch(0.967 0.001 286.375);
-    --muted-foreground: oklch(0.5 0.016 285.938);
-    --accent: oklch(0.967 0.001 286.375);
-    --accent-foreground: oklch(0.21 0.006 285.885);
-    --destructive: oklch(0.505 0.213 27.325);
-    --border: oklch(0.92 0.004 286.32);
-    --input: oklch(0.92 0.004 286.32);
-    --ring: oklch(0.705 0.015 286.067);
+    /* ============================================================
+       TAGMANGO FOUNDATION TOKENS — light
+       Raw scales, 1:1 with the published Radix Colors palette,
+       cross-checked against every value given in the approved
+       "TagMango Visual Foundations v0.1" artifact (Figma Theme A,
+       03 Sep 2026). Product code should not consume these directly —
+       consume the semantic tokens below instead.
+       Iris is CANDIDATE/RESERVED ONLY — do not promote to product use.
+       Lime is intentionally absent from v0.1.
+       ============================================================ */
+    --tm-orange-1: #fefcfb; --tm-orange-2: #fff7ed; --tm-orange-3: #ffefd6; --tm-orange-4: #ffdfb5;
+    --tm-orange-5: #ffd19a; --tm-orange-6: #ffc182; --tm-orange-7: #f5ae73; --tm-orange-8: #ec9455;
+    --tm-orange-9: #f76b15; --tm-orange-10: #ef5f00; --tm-orange-11: #cc4e00; --tm-orange-12: #582d1d;
+
+    --tm-sand-1: #fdfdfc; --tm-sand-2: #f9f9f8; --tm-sand-3: #f1f0ef; --tm-sand-4: #e9e8e6;
+    --tm-sand-5: #e2e1de; --tm-sand-6: #dad9d6; --tm-sand-7: #cfceca; --tm-sand-8: #bcbbb5;
+    --tm-sand-9: #8d8d86; --tm-sand-10: #82827c; --tm-sand-11: #63635e; --tm-sand-12: #21201c;
+
+    --tm-grass-1: #fbfefb; --tm-grass-2: #f5fbf5; --tm-grass-3: #e9f6e9; --tm-grass-4: #daf1db;
+    --tm-grass-5: #c9e8ca; --tm-grass-6: #b2ddb5; --tm-grass-7: #94ce9a; --tm-grass-8: #65ba74;
+    --tm-grass-9: #46a758; --tm-grass-10: #3e9b4f; --tm-grass-11: #2a7e3b; --tm-grass-12: #203c25;
+
+    --tm-amber-1: #fefdfb; --tm-amber-2: #fefbe9; --tm-amber-3: #fff7c2; --tm-amber-4: #ffee9c;
+    --tm-amber-5: #fbe577; --tm-amber-6: #f3d673; --tm-amber-7: #e9c162; --tm-amber-8: #e2a336;
+    --tm-amber-9: #ffc53d; --tm-amber-10: #ffba18; --tm-amber-11: #ab6400; --tm-amber-12: #4f3422;
+
+    --tm-tomato-1: #fffcfc; --tm-tomato-2: #fff8f7; --tm-tomato-3: #feebe7; --tm-tomato-4: #ffdcd3;
+    --tm-tomato-5: #ffcdc2; --tm-tomato-6: #fdbdaf; --tm-tomato-7: #f5a898; --tm-tomato-8: #ec8e7b;
+    --tm-tomato-9: #e54d2e; --tm-tomato-10: #dd4425; --tm-tomato-11: #d13415; --tm-tomato-12: #5c271f;
+
+    --tm-blue-1: #fbfdff; --tm-blue-2: #f4faff; --tm-blue-3: #e6f4fe; --tm-blue-4: #d5efff;
+    --tm-blue-5: #c2e5ff; --tm-blue-6: #acd8fc; --tm-blue-7: #8ec8f6; --tm-blue-8: #5eb1ef;
+    --tm-blue-9: #0090ff; --tm-blue-10: #0588f0; --tm-blue-11: #0d74ce; --tm-blue-12: #113264;
+
+    /* Iris — candidate/reserved only, see globals.css audit notes. */
+    --tm-iris-1: #fdfdff; --tm-iris-2: #f8f8ff; --tm-iris-3: #f0f1fe; --tm-iris-4: #e6e7ff;
+    --tm-iris-5: #dadcff; --tm-iris-6: #cbcdff; --tm-iris-7: #b8baf8; --tm-iris-8: #9b9ef0;
+    --tm-iris-9: #5b5bd6; --tm-iris-10: #5151cd; --tm-iris-11: #5753c6; --tm-iris-12: #272962;
+
+    /* ============================================================
+       TAGMANGO ELEVATION — border-first, restrained. Exact values
+       from the approved artifact.
+       ============================================================ */
+    --tm-shadow-1: 0 1px 2px rgba(54, 42, 31, .06);
+    --tm-shadow-2: 0 8px 24px rgba(54, 42, 31, .08), 0 1px 2px rgba(54, 42, 31, .05);
+    --tm-shadow-3: 0 20px 48px rgba(54, 42, 31, .12), 0 2px 6px rgba(54, 42, 31, .05);
+
+    /* ============================================================
+       TAGMANGO SEMANTIC TOKENS — light
+       Product/component code consumes these, never the foundation
+       scale above directly.
+       ============================================================ */
+    --surface: var(--tm-sand-1);
+    --surface-raised: #ffffff; /* brighter than Sand/1 in light mode, per artifact */
+    --surface-sunken: var(--tm-sand-3);
+    --surface-overlay: var(--surface-raised); /* dialog/command layer; pairs with --shadow-tm-3 */
+    --border-strong: var(--tm-sand-6);
+    --ink-soft: var(--tm-sand-11);
+    --ink-disabled: var(--tm-sand-10);
+
+    /* KNOWN V0.1 BRAND/ACTION CONTRAST EXCEPTION
+       White on Orange/9 = 2.97:1. White on Orange/10 = 3.33:1.
+       Both fail WCAG AA for normal text. Retained deliberately as a
+       known visual exception in v0.1 — NOT WCAG-compliant, not hidden.
+       Tracked as DS-A11Y-01 (resolve primary action contrast). */
+    --action-primary: var(--tm-orange-9);
+    --action-primary-hover: var(--tm-orange-10);
+    --action-primary-foreground: #ffffff;
+    /* Orange/12 — AA-safe brand-colored text on a light surface (Orange/11
+       measured at 4.28:1, just under AA; not for use as a solid-fill
+       foreground — that's --action-primary-foreground above). */
+    --action-primary-text: var(--tm-orange-12);
+    /* primary-surface Button variant: a subtle, subordinate tint — always
+       lighter than the solid fill above. */
+    --action-primary-surface: var(--tm-orange-2);
+    --action-primary-surface-border: var(--tm-orange-3);
+
+    --selected-surface: var(--tm-orange-4);
+    --selected-foreground: var(--tm-orange-12);
+    --selected-border: var(--tm-orange-7);
+
+    --success: var(--tm-grass-11);
+    --success-bg: var(--tm-grass-2);
+    --warning: var(--tm-amber-12); /* AA text on --warning-bg */
+    --warning-solid: var(--tm-amber-11); /* AA with white, for solid warning fills */
+    --warning-bg: var(--tm-amber-2);
+    --info: var(--tm-blue-11);
+    --info-bg: var(--tm-blue-2);
+
+    --background: var(--tm-sand-2); /* canvas */
+    --foreground: var(--tm-sand-12); /* ink */
+    --card: var(--surface);
+    --card-foreground: var(--foreground);
+    --popover: var(--surface-raised);
+    --popover-foreground: var(--foreground);
+    --primary: var(--action-primary);
+    --primary-foreground: var(--action-primary-foreground);
+    --secondary: oklch(0.967 0.001 286.375); /* unchanged — see audit notes: only 1 usage found, mapping not yet decided */
+    --secondary-foreground: oklch(0.21 0.006 285.885); /* unchanged, same reason */
+    --muted: var(--surface-sunken);
+    --muted-foreground: var(--ink-soft);
+    --accent: var(--surface-sunken); /* matches pre-existing repo convention: accent == muted */
+    --accent-foreground: var(--foreground);
+    /* Tomato/12 — matches the artifact's own "Feedback role scales" demo
+       exactly (#5c271f is its literal label color for the Error scale once
+       the surface isn't the lightest tint). Tomato/11 (the vivid Error/11
+       identifier, #D13415) only clears AA against the dedicated Tomato/2
+       card background (4.75:1) — but text-destructive also gets inherited
+       onto plain neutral surfaces (e.g. Field's wrapper cascades it onto an
+       invalid input), where it drops to ~4.1:1 and fails. Tomato/12 clears
+       AA in every context, which is what makes one token usable everywhere
+       (bg-destructive-bg + text-destructive, never an opacity-derived tint
+       like bg-destructive/10 — that's what produced both a duller color and
+       a real AA failure in the first pass). */
+    --destructive: var(--tm-tomato-12);
+    --destructive-bg: var(--tm-tomato-2);
+    /* Pinned to the same value in both themes — like --action-primary — so a
+       solid destructive fill stays a recognizable, fixed "danger red"
+       regardless of theme, rather than flipping with the ramp the way the
+       text-safe --destructive above deliberately does. Verified 4.99:1 with
+       white text. */
+    --destructive-solid: #d13415;
+    /* Tomato/11 — for text that already sits on the dedicated
+       --destructive-bg tint (Button/Badge/Alert/Bubble/Attachment's error
+       icon). Tomato/12 (--destructive) reads as generic dark brown here —
+       at that depth it's nearly indistinguishable from Orange/12 (the
+       "link" variant's color), which is exactly the bug this fixes.
+       Tomato/11 is visibly red instead, and still clears AA against
+       Tomato/2 (4.75:1) — verified only for that specific pairing, unlike
+       --destructive-solid above this isn't pinned, so dark mode gets
+       Tomato/12's dark-mode value (a light pink, already visibly
+       red/distinct there — the collision is light-mode only). Do NOT use
+       this for text that isn't already on --destructive-bg (e.g. Field's
+       inherited error text, or a menu item's translucent-popover focus
+       state) — those need the darker --destructive for AA. */
+    --destructive-text: var(--tm-tomato-11);
+    --border: var(--tm-sand-4);
+    --input: var(--border-strong); /* form fields use the stronger border step, per artifact */
+    /* Orange/12 is the text step (near-black-brown in light, pale cream in
+       dark) -- as a ring/border color it reads as a dull brown/tan smudge,
+       not "TagMango orange". Focus should read as the same brand orange as
+       a solid action button, so this points at --action-primary (Orange/9)
+       instead of the foundation scale directly. */
+    --ring: var(--action-primary); /* focus */
+    --focus-ring: var(--ring);
     --chart-1: oklch(0.871 0.006 286.286);
     --chart-2: oklch(0.552 0.016 285.938);
     --chart-3: oklch(0.442 0.017 285.786);
@@ -83,24 +291,112 @@
 }
 
 .dark {
-    --background: oklch(0.141 0.005 285.823);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.21 0.006 285.885);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.21 0.006 285.885);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.795 0.184 86.047);
-    --primary-foreground: oklch(0.421 0.095 57.708);
-    --secondary: oklch(0.274 0.006 286.033);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.274 0.006 286.033);
-    --muted-foreground: oklch(0.705 0.015 286.067);
-    --accent: oklch(0.274 0.006 286.033);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.552 0.016 285.938);
+    /* TagMango Foundation Tokens — dark. Same audit notes as :root above. */
+    --tm-orange-1: #17120e; --tm-orange-2: #1e160f; --tm-orange-3: #331e0b; --tm-orange-4: #462100;
+    --tm-orange-5: #562800; --tm-orange-6: #66350c; --tm-orange-7: #7e451d; --tm-orange-8: #a35829;
+    --tm-orange-9: #f76b15; --tm-orange-10: #ff801f; --tm-orange-11: #ffa057; --tm-orange-12: #ffe0c2;
+
+    --tm-sand-1: #111110; --tm-sand-2: #191918; --tm-sand-3: #222221; --tm-sand-4: #2a2a28;
+    --tm-sand-5: #31312e; --tm-sand-6: #3b3a37; --tm-sand-7: #494844; --tm-sand-8: #62605b;
+    --tm-sand-9: #6f6d66; --tm-sand-10: #7c7b74; --tm-sand-11: #b5b3ad; --tm-sand-12: #eeeeec;
+
+    --tm-grass-1: #0e1511; --tm-grass-2: #141a15; --tm-grass-3: #1b2a1e; --tm-grass-4: #1d3a24;
+    --tm-grass-5: #25482d; --tm-grass-6: #2d5736; --tm-grass-7: #366740; --tm-grass-8: #3e7949;
+    --tm-grass-9: #46a758; --tm-grass-10: #53b365; --tm-grass-11: #71d083; --tm-grass-12: #c2f0c2;
+
+    --tm-amber-1: #16120c; --tm-amber-2: #1d180f; --tm-amber-3: #302008; --tm-amber-4: #3f2700;
+    --tm-amber-5: #4d3000; --tm-amber-6: #5c3d05; --tm-amber-7: #714f19; --tm-amber-8: #8f6424;
+    --tm-amber-9: #ffc53d; --tm-amber-10: #ffd60a; --tm-amber-11: #ffca16; --tm-amber-12: #ffe7b3;
+
+    --tm-tomato-1: #181111; --tm-tomato-2: #1f1513; --tm-tomato-3: #391714; --tm-tomato-4: #4e1511;
+    --tm-tomato-5: #5e1c16; --tm-tomato-6: #6e2920; --tm-tomato-7: #853a2d; --tm-tomato-8: #ac4d39;
+    --tm-tomato-9: #e54d2e; --tm-tomato-10: #ec6142; --tm-tomato-11: #ff977d; --tm-tomato-12: #fbd3cb;
+
+    --tm-blue-1: #0d1520; --tm-blue-2: #111927; --tm-blue-3: #0d2847; --tm-blue-4: #003362;
+    --tm-blue-5: #004074; --tm-blue-6: #104d87; --tm-blue-7: #205d9e; --tm-blue-8: #2870bd;
+    --tm-blue-9: #0090ff; --tm-blue-10: #3b9eff; --tm-blue-11: #70b8ff; --tm-blue-12: #c2e6ff;
+
+    --tm-iris-1: #13131e; --tm-iris-2: #171625; --tm-iris-3: #202248; --tm-iris-4: #262a65;
+    --tm-iris-5: #303374; --tm-iris-6: #3d3e82; --tm-iris-7: #4a4a95; --tm-iris-8: #5958b1;
+    --tm-iris-9: #5b5bd6; --tm-iris-10: #6e6ade; --tm-iris-11: #b1a9ff; --tm-iris-12: #e0dffe;
+
+    --tm-shadow-1: 0 1px 2px rgba(0, 0, 0, .28);
+    --tm-shadow-2: 0 8px 24px rgba(0, 0, 0, .34), 0 1px 2px rgba(0, 0, 0, .24);
+    --tm-shadow-3: 0 20px 48px rgba(0, 0, 0, .46), 0 2px 6px rgba(0, 0, 0, .28);
+
+    /* TagMango Semantic Tokens — dark */
+    --surface: var(--tm-sand-2);
+    --surface-raised: var(--tm-sand-3);
+    /* Sand/1 is already the darkest foundation step -- it's also
+       --background itself below, so a literal var(--tm-sand-1) here made
+       --surface-sunken (and --muted/--accent, which consume it) exactly
+       equal to the page canvas: neutral-surface buttons, Tabs' default
+       track, and every hover:bg-muted/bg-accent state had zero fill
+       contrast against dark backgrounds. Light mode doesn't have this
+       problem (its sunken step, Sand/3, sits on the opposite side of
+       background from Sand/1/raised). Confirmed via computed values
+       (both #111110), not just a screenshot impression -- deepened past
+       Sand/1 with color-mix rather than inventing a new foundation step,
+       the same "darken by a fixed amount" idiom already used for hover
+       states elsewhere in this file. */
+    --surface-sunken: color-mix(in oklch, var(--tm-sand-1), black 12%);
+    --surface-overlay: var(--surface-raised);
+    --border-strong: var(--tm-sand-7);
+    --ink-soft: var(--tm-sand-11);
+    --ink-disabled: var(--tm-sand-10);
+
+    /* KNOWN V0.1 BRAND/ACTION CONTRAST EXCEPTION — see :root above (DS-A11Y-01).
+       action-primary/-hover/-foreground are deliberately pinned to the SAME
+       fixed values as light mode (not remapped to the dark ramp), per artifact. */
+    --action-primary: #f76b15;
+    --action-primary-hover: #ef5f00;
+    --action-primary-foreground: #ffffff;
+    --action-primary-text: var(--tm-orange-12);
+    --action-primary-surface: var(--tm-orange-2);
+    --action-primary-surface-border: var(--tm-orange-3);
+
+    --selected-surface: var(--tm-orange-4);
+    --selected-foreground: var(--tm-orange-12);
+    --selected-border: var(--tm-orange-7);
+
+    --success: var(--tm-grass-11);
+    --success-bg: var(--tm-grass-2);
+    --warning: var(--tm-amber-12);
+    --warning-solid: var(--tm-amber-11);
+    --warning-bg: var(--tm-amber-2);
+    --info: var(--tm-blue-11);
+    --info-bg: var(--tm-blue-2);
+
+    --background: var(--tm-sand-1); /* canvas */
+    --foreground: var(--tm-sand-12); /* ink */
+    --card: var(--surface);
+    --card-foreground: var(--foreground);
+    --popover: var(--surface-raised);
+    --popover-foreground: var(--foreground);
+    --primary: var(--action-primary);
+    --primary-foreground: var(--action-primary-foreground);
+    --secondary: oklch(0.274 0.006 286.033); /* unchanged — see audit notes */
+    --secondary-foreground: oklch(0.985 0 0); /* unchanged, same reason */
+    --muted: var(--surface-sunken);
+    --muted-foreground: var(--ink-soft);
+    --accent: var(--surface-sunken);
+    --accent-foreground: var(--foreground);
+    --destructive: var(--tm-tomato-12);
+    --destructive-bg: var(--tm-tomato-2);
+    --destructive-solid: #d13415;
+    /* Dark-mode Tomato/12 is already a light pink — visibly red/distinct
+       from Orange/12 here, so no asymmetric step swap is needed like in
+       light mode (see :root's comment on this token). */
+    --destructive-text: var(--destructive);
+    --border: var(--tm-sand-5);
+    --input: var(--border-strong);
+    /* Orange/12 is the text step (near-black-brown in light, pale cream in
+       dark) -- as a ring/border color it reads as a dull brown/tan smudge,
+       not "TagMango orange". Focus should read as the same brand orange as
+       a solid action button, so this points at --action-primary (Orange/9)
+       instead of the foundation scale directly. */
+    --ring: var(--action-primary); /* focus */
+    --focus-ring: var(--ring);
     --chart-1: oklch(0.871 0.006 286.286);
     --chart-2: oklch(0.552 0.016 285.938);
     --chart-3: oklch(0.442 0.017 285.786);

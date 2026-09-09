@@ -259,7 +259,7 @@ function QuestionnaireNext({
   children,
   className,
   size = "default",
-  variant = "default",
+  variant = "primary-solid",
   ...props
 }: React.ComponentProps<typeof QuestionnairePrimitive.Next> &
   Pick<React.ComponentProps<typeof Button>, "size" | "variant">) {
@@ -284,7 +284,7 @@ function QuestionnaireSubmit({
   children,
   className,
   size = "default",
-  variant = "default",
+  variant = "primary-solid",
   ...props
 }: React.ComponentProps<typeof QuestionnairePrimitive.Submit> &
   Pick<React.ComponentProps<typeof Button>, "size" | "variant">) {

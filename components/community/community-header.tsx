@@ -22,7 +22,7 @@ export function CommunityHeader({
           </p>
         </div>
         <Button
-          variant={following ? "outline" : "default"}
+          variant={following ? "outline" : "primary-solid"}
           size="sm"
           onClick={() => setFollowing((value) => !value)}
         >

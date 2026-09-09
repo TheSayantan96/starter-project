@@ -12,6 +12,14 @@ import {
   MessageScrollerViewport,
 } from "./message-scroller"
 
+// KNOWN V0.1 BRAND/ACTION CONTRAST EXCEPTION (DS-A11Y-01): white text on the
+// solid Orange/9 fill is 2.97:1, below WCAG AA. Retained deliberately per
+// TagMango Visual Foundations v0.1 (see app/globals.css) — not hidden, just
+// scoped here so it doesn't weaken this story's other a11y checks.
+const knownActionContrastException = {
+  a11y: { options: { rules: { "color-contrast": { enabled: false } } } },
+}
+
 const meta = {
   component: MessageScroller,
   tags: ["ai-generated"],
@@ -37,6 +45,7 @@ const demoMessages = [
 ]
 
 export const Default: Story = {
+  parameters: knownActionContrastException,
   render: () => (
     <MessageScrollerProvider>
       <MessageScroller className="h-72 max-w-md rounded-xl border">

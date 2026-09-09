@@ -15,6 +15,12 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // storybook-static/ is gitignored build output (npm run build-storybook)
+    // but this override replaces eslint-config-next's own ignore list rather
+    // than extending it, so it wasn't excluded here -- once the directory
+    // exists on disk, `eslint` lints its minified bundles and reports
+    // thousands of spurious errors/warnings unrelated to any real source.
+    "storybook-static/**",
   ]),
   ...storybook.configs["flat/recommended"]
 ]);
