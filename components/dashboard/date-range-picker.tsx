@@ -35,7 +35,11 @@ function DateRangePicker({
         <CalendarIcon data-icon="inline-start" />
         {label}
       </PopoverTrigger>
-      <PopoverContent align="end" className="w-auto p-0">
+      <PopoverContent
+        align="end"
+        className="w-auto p-0"
+        aria-label="Choose date range"
+      >
         <Calendar
           mode="range"
           selected={value}

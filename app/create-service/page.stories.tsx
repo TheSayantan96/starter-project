@@ -62,7 +62,7 @@ export const SuccessPage: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     await userEvent.click(canvas.getByText("Success Page"))
-    await userEvent.click(canvas.getByText("Customise button"))
+    await userEvent.click(canvas.getByRole("switch", { name: "Customise button" }))
     await expect(canvas.getByText("Hide button")).toBeVisible()
   },
 }

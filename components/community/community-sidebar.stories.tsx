@@ -47,8 +47,14 @@ export const WithChannels: Story = {
 export const CollapseGroup: Story = {
   play: async ({ canvas }) => {
     const trigger = canvas.getByRole("button", { name: /Get Started/ })
-    await expect(canvas.getAllByText("No channels yet")[0]).toBeVisible()
+    const [firstPanelText] = canvas.getAllByText("No channels yet")
+    await expect(trigger).toHaveAttribute("aria-expanded", "true")
+    await expect(firstPanelText).toBeVisible()
     await userEvent.click(trigger)
-    await expect(canvas.queryAllByText("No channels yet")).toHaveLength(2)
+    // The Collapsible animates height to 0 rather than unmounting its
+    // panel, so the text stays in the DOM -- assert on visibility, not
+    // presence/count.
+    await expect(trigger).toHaveAttribute("aria-expanded", "false")
+    await expect(firstPanelText).not.toBeVisible()
   },
 }

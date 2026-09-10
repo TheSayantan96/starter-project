@@ -23,7 +23,9 @@ export const Default: Story = {
       canvas.getByRole("button", { name: "Start date - End date" })
     )
     const body = within(canvasElement.ownerDocument.body)
-    await waitFor(() => expect(body.getByRole("grid")).toBeVisible())
+    // Two months render side by side (numberOfMonths={2}), each its own
+    // grid -- assert on both rather than a single ambiguous `getByRole`.
+    await waitFor(() => expect(body.getAllByRole("grid")).toHaveLength(2))
   },
 }
 
