@@ -25,7 +25,7 @@ export const Default: Story = {
   play: async ({ canvas }) => {
     await expect(canvas.getByText("Studio")).toBeVisible()
     await expect(
-      canvas.getByPlaceholderText("Post about Studio...")
+      canvas.getByRole("button", { name: "Post about Studio..." })
     ).toBeVisible()
     await expect(canvas.getByRole("tab", { name: "Top" })).toBeVisible()
   },
