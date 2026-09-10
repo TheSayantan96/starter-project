@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
-import { AlertCircleIcon, CheckCircle2Icon } from "lucide-react"
+import { AlertCircleIcon, CheckCircle2Icon, InfoIcon } from "lucide-react"
 
 import { Alert, AlertAction, AlertDescription, AlertTitle } from "./alert"
 import { Button } from "./button"
@@ -31,6 +31,19 @@ export const Destructive: Story = {
       <AlertTitle>Unable to process your payment.</AlertTitle>
       <AlertDescription>
         Please verify your billing information and try again.
+      </AlertDescription>
+    </Alert>
+  ),
+}
+
+export const Info: Story = {
+  render: () => (
+    <Alert variant="info" className="max-w-md">
+      <InfoIcon />
+      <AlertTitle>Please note:</AlertTitle>
+      <AlertDescription>
+        Analytics are available only for sessions conducted from 31st March
+        2026 onward.
       </AlertDescription>
     </Alert>
   ),
